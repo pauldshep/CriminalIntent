@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 
 import com.sss.android.criminalintent.CrimeDbSchema.CrimeTable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -169,6 +171,7 @@ public class CrimeLab
     }   // end public List<Crime> getCrimes()
 
 
+    //==========================================================================
     /**
      * Get Crime associated with specified id.  Null if it could not be found
      *
@@ -194,5 +197,26 @@ public class CrimeLab
         {
             cursor.close();
         }
-    }
+    }   // end public Crime getCrime(UUID id)
+
+
+    //==========================================================================
+    /**
+     * @return photograph file associated with crime object or null if there
+     * is no external storage for photographs.
+     */
+    public File getPhotoFile(Crime crime)
+    {
+        File externalFilesDir = mContext
+                .getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        if(externalFilesDir == null)
+        {
+            return null;
+        }
+
+        return new File(externalFilesDir, crime.getPhotoFilename());
+    }   // end public File getPhotoFile(Crime crime)
+
+
 }   // end public class CrimeLab

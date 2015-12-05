@@ -76,10 +76,31 @@ public class Crime
         mSolved = solved;
     }
 
-    public String getSuspect() {return mSuspect;}
+    //==========================================================================
+    public String getSuspect()
+    {
+        return mSuspect;
+    }
 
-    public void setSuspect(String suspect) {mSuspect = suspect;}
+    //==========================================================================
+    public void setSuspect(String suspect)
+    {
+        mSuspect = suspect;
+    }
 
+    //==========================================================================
+    /**
+     * @return photograph name build from crime object UUID
+     */
+    public String getPhotoFilename()
+    {
+        return "IMG_" + getId().toString() + ".jpg";
+    }
+
+    //==========================================================================
+    /**
+     * @return UUID for the crime object
+     */
     public UUID getId()
     {
         return mId;
